@@ -29,14 +29,19 @@ test_that("boundary_plot reports overshoot share in the caption", {
   expect_match(p$labels$caption, "overshoot")
 })
 
-test_that("doughnut and conch build", {
-  d <- data.frame(dim = c("a", "b", "c"), v = c(0.2, 0.5, 0.8))
-  expect_s3_class(doughnut(d, "dim", "v"), "ggplot")
-  expect_s3_class(conch(2016:2025, seq(38, 55, length.out = 10), 50), "ggplot")
+test_that("doughnut builds with independent social and ecological rings", {
+  s <- data.frame(dimension = c("water", "food", "health"),
+                  shortfall = c(0.2, 0.5, 0))
+  e <- data.frame(dimension = c("climate", "land", "air"),
+                  overshoot = c(0.8, 0, NA))
+  p <- doughnut(s, e)
+  expect_s3_class(p, "ggplot")
+  expect_silent(ggplot2::ggplot_build(p))
 })
 
-test_that("conch labels are formatted, not raw floats", {
-  p <- conch(2016:2025 + 0.9166, seq(38, 55, length.out = 10), 50, label_fmt = round)
-  txt <- p$layers[[length(p$layers)]]$data$yr
-  expect_false(any(grepl("\\.\\d{3,}", txt)))
+test_that("doughnut tolerates differing ring lengths and all-zero deviations", {
+  s <- data.frame(dimension = letters[1:12], shortfall = rep(0, 12))
+  e <- data.frame(dimension = letters[1:9], overshoot = rep(0, 9))
+  expect_s3_class(doughnut(s, e), "ggplot")
+  expect_silent(ggplot2::ggplot_build(doughnut(s, e)))
 })

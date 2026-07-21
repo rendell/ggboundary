@@ -1,6 +1,6 @@
 # Iteration: 1
 # Verify ggboundary renders on the same Aruba-calibrated data used in the ggconch
-# stress test: geom_boundary (flagship), doughnut (snapshot), conch (companion).
+# stress test: geom_boundary (flagship) and doughnut (single-instant snapshot).
 suppressPackageStartupMessages(library(ggplot2))
 set.seed(42)
 
@@ -8,7 +8,7 @@ hub <- "C:/Users/Rendell CE/Documents/GitHub/knowledge-hub"   # real Aruba data 
 pkg <- "C:/Users/Rendell CE/Documents/GitHub/ggboundary"      # package now lives here
 out <- file.path(pkg, "gallery-output")
 dir.create(out, showWarnings = FALSE, recursive = TRUE)
-for (f in c("boundary.R", "doughnut.R", "conch.R")) source(file.path(pkg, "R", f))
+for (f in c("boundary.R", "doughnut.R")) source(file.path(pkg, "R", f))
 
 ## same monthly series + moving carrying-capacity boundary as the stress test ----
 real <- read.csv(file.path(hub,
@@ -33,8 +33,11 @@ g$boundary <- approx(c(2016, 2019.9, 2020.5, 2022, 2024),
                      c(93000, 99000, 99000, 94000, 98000), g$t, rule = 2)$y
 
 ## 1. flagship: geom_boundary via the one-call wrapper ----------------------
+# show_slack = FALSE: on a demand series, "far below the ceiling" is the COVID
+# collapse, not a safe state, and a calm green wash there would read as reassuring.
 p1 <- boundary_plot(g, "t", "visitors", "boundary",
-                    title = "ggboundary::boundary_plot() — Aruba arrivals vs a moving capacity ceiling",
+                    show_slack = FALSE,
+                    title = "Aruba arrivals against a moving capacity ceiling",
                     y_lab = "stop-over visitors / month") +
       scale_x_continuous(breaks = yrs)
 ggsave(file.path(out, "boundary.png"), p1, width = 8, height = 4.2, dpi = 150, bg = "white")
@@ -48,29 +51,29 @@ p1b <- ggplot(g) +
   theme_minimal()
 ggsave(file.path(out, "boundary_faceted.png"), p1b, width = 8, height = 4, dpi = 150, bg = "white")
 
-## 2. doughnut snapshot ------------------------------------------------------
-d <- data.frame(dim = c("water", "food", "energy", "income", "health", "jobs"),
-                v = c(0.18, 0.52, 0.82, 0.44, 0.7, 0.6))
-ggsave(file.path(out, "doughnut.png"),
-       doughnut(d, "dim", "v", title = "doughnut(): safe operating space at one instant"),
-       width = 5.2, height = 5.2, dpi = 150, bg = "white")
-
-## 3. conch companion — bug fixes: integer year labels, no centre cram ------
-p3 <- conch(time = g$t, value = g$visitors, boundary = g$boundary,
-            turns = (n - 1) / 12, per_turn = 1.22, amp = 0.5,
-            n_labels = length(yrs), label_fmt = round,
-            title = "conch(): expressive companion (label + cram bugs fixed)")
-ggsave(file.path(out, "conch.png"), p3, width = 5.6, height = 5.6, dpi = 150, bg = "white")
+## 2. doughnut snapshot, canonical two-ring form -----------------------------
+social <- data.frame(
+  dimension = c("water", "food", "health", "education", "income & work",
+                "peace & justice", "political voice", "social equity",
+                "gender equality", "housing", "networks", "energy"),
+  shortfall = c(0.36, 0.29, 0.34, 0.44, 0.53, 0.42,
+                0.53, 0.39, 0.40, 0.24, 0.24, 0.38))
+ecological <- data.frame(
+  dimension = c("climate change", "ocean acidification", "chemical pollution",
+                "nitrogen & phosphorus loading", "freshwater withdrawals",
+                "land conversion", "biodiversity loss", "air pollution",
+                "ozone layer depletion"),
+  overshoot = c(0.85, 0.30, NA, 1.00, 0.20, 0.60, 0.95, NA, 0))
+p2 <- doughnut(social, ecological, title = "A global Doughnut")
+ggsave(file.path(out, "doughnut.png"), p2,
+       width = 7.2, height = 7.2, dpi = 150, bg = "white")
 
 ## inline assertions ---------------------------------------------------------
 stopifnot(
   is.list(geom_boundary(g, "t", "visitors", "boundary")),
   inherits(p1, "ggplot"),
-  inherits(doughnut(d, "dim", "v"), "ggplot"),
-  inherits(p3, "ggplot")
+  inherits(p2, "ggplot")
 )
-lab_txt <- p3$layers[[length(p3$layers)]]$data$yr
-cat("conch marker labels:", paste(lab_txt, collapse = " "), "\n")
-stopifnot(!any(grepl("\\.\\d{3,}", lab_txt)))   # no 2024.9166... floats
+invisible(ggplot_build(p2))   # errors here if the polar geometry is malformed
 cat("overshoot share:", sprintf("%.0f%%", 100 * mean(g$visitors > g$boundary)), "\n")
 cat("ALL RENDERS + ASSERTIONS OK ->", out, "\n")

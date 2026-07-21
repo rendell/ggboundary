@@ -16,8 +16,8 @@
 #'
 #' Returns a list of ggplot2 layers, so add it to a `ggplot()` and combine it
 #' with any scales, facets, and themes as usual. See [boundary_plot()] for a
-#' one-call themed wrapper, and [doughnut()] / [conch()] for the polar snapshot
-#' and the expressive spiral companions.
+#' one-call themed wrapper, and [doughnut()] for the polar single-instant
+#' snapshot.
 #'
 #' @param data a data.frame.
 #' @param x,value,boundary column names (character) in `data`. `boundary` may

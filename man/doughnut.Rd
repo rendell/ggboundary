@@ -2,34 +2,82 @@
 % Please edit documentation in R/doughnut.R
 \name{doughnut}
 \alias{doughnut}
-\title{Doughnut Economics chart (static safe operating space)}
+\title{Doughnut Economics chart (the safe and just space at one instant)}
 \usage{
-doughnut(data, dimension, value, floor = 0.33, ceiling = 0.66, title = NULL)
+doughnut(
+  social,
+  ecological,
+  dimension = "dimension",
+  shortfall = "shortfall",
+  overshoot = "overshoot",
+  title = NULL,
+  safe_fill = "#6FCB1E",
+  ring_fill = "#1F9E2E",
+  hole_fill = "#D9D9D9",
+  breach_fill = "#F5121E",
+  unquantified_fill = "#C9D3DC",
+  label_size = 2.4,
+  ring_label_size = 2.4
+)
 }
 \arguments{
-\item{data}{data.frame, one row per dimension.}
+\item{social}{data.frame of social foundation dimensions, one row each, with a
+label column and a shortfall column scaled 0 (fully met) to 1 (total
+shortfall). \code{NA} marks a dimension whose boundary is not quantified.}
 
-\item{dimension}{name of the label column.}
+\item{ecological}{data.frame of ecological ceiling dimensions, one row each,
+with a label column and an overshoot column, 0 meaning within the boundary
+and larger values further beyond it. \code{NA} marks a boundary not quantified.}
 
-\item{value}{name of the value column (same scale as floor/ceiling).}
+\item{dimension}{name of the label column, used in both data frames.}
 
-\item{floor, ceiling}{safe-band bounds.}
+\item{shortfall}{name of the shortfall column in \code{social}.}
+
+\item{overshoot}{name of the overshoot column in \code{ecological}.}
 
 \item{title}{optional plot title.}
+
+\item{safe_fill, ring_fill}{fill for the safe and just space and for the two
+boundary bands.}
+
+\item{hole_fill}{fill for the centre of the Doughnut.}
+
+\item{breach_fill}{fill for shortfall and overshoot wedges.}
+
+\item{unquantified_fill}{fill for dimensions whose boundary is not quantified.}
+
+\item{label_size, ring_label_size}{text sizes for dimension labels and for the
+two band labels.}
 }
 \value{
 a ggplot object.
 }
 \description{
-The Raworth doughnut proper: a green safe band between a \code{floor} (social
-foundation) and a \code{ceiling} (ecological limit). Each dimension shows only its
-deviation, shortfalls bite \emph{inward} from the floor toward the hole, overshoots
-break \emph{outward} past the ceiling. This is the polar snapshot half of the
-grammar, the boundary at a single instant; see \code{\link[=geom_boundary]{geom_boundary()}} for the
-Cartesian trajectory that restores the time derivative the doughnut lacks.
+Draws the Doughnut in its canonical form: an inner ring of social foundation
+dimensions whose shortfalls bite \emph{inward} toward the hole, an outer ring of
+ecological ceiling dimensions whose overshoots break \emph{outward} past the
+boundary, and the green safe and just space between them. The two rings carry
+independent dimension sets, so a 12-dimension social foundation and a
+9-dimension ecological ceiling divide the circle differently, exactly as in
+Raworth's figure.
+}
+\details{
+This is the polar snapshot half of the grammar, the boundary at a single
+instant. See \code{\link[=geom_boundary]{geom_boundary()}} for the Cartesian trajectory that restores the
+time derivative the Doughnut necessarily lacks.
 }
 \examples{
-d <- data.frame(dim = c("water", "food", "energy", "income"),
-                v = c(0.2, 0.5, 0.8, 0.45))
-doughnut(d, "dim", "v")
+social <- data.frame(
+  dimension = c("water", "food", "health", "education", "income & work",
+                "peace & justice", "political voice", "social equity",
+                "gender equality", "housing", "networks", "energy"),
+  shortfall = c(0.36, 0.29, 0.34, 0.44, 0.53, 0.42,
+                0.53, 0.39, 0.40, 0.24, 0.24, 0.38))
+ecological <- data.frame(
+  dimension = c("climate change", "ocean acidification", "chemical pollution",
+                "nitrogen & phosphorus loading", "freshwater withdrawals",
+                "land conversion", "biodiversity loss", "air pollution",
+                "ozone layer depletion"),
+  overshoot = c(0.85, 0.30, NA, 1.00, 0.20, 0.60, 0.95, NA, 0))
+doughnut(social, ecological, title = "A global Doughnut")
 }

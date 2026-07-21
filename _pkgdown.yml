@@ -8,11 +8,10 @@ reference:
   contents:
   - geom_boundary
   - boundary_plot
-- title: Companions
-  desc: The static polar snapshot and the expressive spiral.
+- title: Snapshot
+  desc: The Doughnut, many dimensions at a single instant.
   contents:
   - doughnut
-  - spiral_boundary
 
 articles:
 - title: Get started

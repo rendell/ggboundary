@@ -1,4 +1,5 @@
 ^verify-render\.R$
+^dev$
 ^gallery-output$
 ^cran-comments\.md$
 ^\.Rproj\.user$

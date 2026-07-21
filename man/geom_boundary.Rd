@@ -56,8 +56,8 @@ in the plot as its own series rather than as a constant. Passing a vector to
 
 Returns a list of ggplot2 layers, so add it to a \code{ggplot()} and combine it
 with any scales, facets, and themes as usual. See \code{\link[=boundary_plot]{boundary_plot()}} for a
-one-call themed wrapper, and \code{\link[=doughnut]{doughnut()}} / \code{\link[=conch]{conch()}} for the polar snapshot
-and the expressive spiral companions.
+one-call themed wrapper, and \code{\link[=doughnut]{doughnut()}} for the polar single-instant
+snapshot.
 }
 \examples{
 df <- data.frame(year = 2016:2025,
