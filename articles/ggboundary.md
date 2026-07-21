@@ -37,28 +37,38 @@ ggplot(df) +
 The dashed line is the boundary, moving. Red marks overshoot, green
 marks slack.
 
-## The doughnut, as the single-instant snapshot
+## The Doughnut, as the single-instant snapshot
+
+[`doughnut()`](https://rendell.github.io/ggboundary/reference/doughnut.md)
+draws the other half of the grammar: many dimensions, one moment. The
+two rings carry independent dimension sets, so a twelve-part social
+foundation and a nine-part ecological ceiling divide the circle
+differently, as in Raworth’s original. Shortfalls bite inward toward the
+hole, overshoots break outward past the ceiling, and both are red.
 
 ``` r
 
-d <- data.frame(dim = c("water", "food", "energy", "income", "health"),
-                v = c(0.2, 0.5, 0.8, 0.45, 0.7))
-doughnut(d, "dim", "v")
+social <- data.frame(
+  dimension = c("water", "food", "health", "education", "income & work",
+                "peace & justice", "political voice", "social equity",
+                "gender equality", "housing", "networks", "energy"),
+  shortfall = c(0.36, 0.29, 0.34, 0.44, 0.53, 0.42,
+                0.53, 0.39, 0.40, 0.24, 0.24, 0.38))
+
+ecological <- data.frame(
+  dimension = c("climate change", "ocean acidification", "chemical pollution",
+                "nitrogen & phosphorus loading", "freshwater withdrawals",
+                "land conversion", "biodiversity loss", "air pollution",
+                "ozone layer depletion"),
+  overshoot = c(0.85, 0.30, NA, 1.00, 0.20, 0.60, 0.95, NA, 0))
+
+doughnut(social, ecological)
 ```
 
 ![](ggboundary_files/figure-html/unnamed-chunk-3-1.png)
 
-## The conch, as the expressive companion
-
-``` r
-
-conch(df$year, df$hhi, df$cap, label_fmt = round,
-      title = "The same series, wound through time")
-```
-
-![](ggboundary_files/figure-html/unnamed-chunk-4-1.png)
-
-Use the conch to make the boundary idea memorable, not to read values
-off. When precision matters, the Cartesian
+Read the two together. The Doughnut says where you stand across many
+dimensions at one instant;
 [`geom_boundary()`](https://rendell.github.io/ggboundary/reference/geom_boundary.md)
-above is the tool.
+says how one of them got there, and whether the boundary itself was
+moving while it did.

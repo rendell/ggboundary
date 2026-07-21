@@ -38,34 +38,47 @@ boundary_plot(df, "year", "hhi", "cap",
               title = "Concentration against a moving ceiling")
 ```
 
-## Two companions, honestly framed
+## The snapshot: `doughnut()`
 
 [`doughnut()`](https://rendell.github.io/ggboundary/reference/doughnut.md)
-draws the classic Doughnut Economics chart, the same boundary primitives
-at a single instant on polar coordinates. It is the snapshot;
+draws the Doughnut in its canonical form. The two rings carry
+independent dimension sets, so a twelve-part social foundation and a
+nine-part ecological ceiling divide the circle differently, as in
+Raworth’s original. Shortfalls bite inward toward the hole, overshoots
+break outward past the ceiling, both in red, and dimensions whose
+boundary is not quantified are drawn pale rather than given a length
+they do not have.
+
+``` r
+
+doughnut(social, ecological, title = "A global Doughnut")
+```
+
+It is the single-instant view;
 [`geom_boundary()`](https://rendell.github.io/ggboundary/reference/geom_boundary.md)
 is its time-dual.
 
-[`conch()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
-winds the trajectory into a log-spiral. It is an expressive object for
-communication, covers, and 3D-printed data sculptures, not an analytical
-instrument. On real data a line chart reads magnitude and timing better
-and a heatmap reads phase-by-trend better, so the conch ships paired
-with the Cartesian view rather than in place of it. The stress test that
-established this lives in the superseded `ggconch/` folder.
-
 ## Why this exists
 
-The doughnut has no time in it. This package supplies the temporal dual,
+The Doughnut has no time in it. This package supplies the temporal dual,
 and makes the exogenous-versus-endogenous boundary choice explicit,
 which is where the methods contribution sits. Sibling to the `pyramid3d`
 and tourism-data-objects work.
 
 ## Status
 
-Pre-CRAN. Core layer, doughnut, and conch build and render. Remaining
-before submission: `R CMD check` clean in a full R session,
-roxygen-regenerated man pages, a fuller vignette, and a pkgdown site.
+Pre-CRAN, version 0.1.0. `R CMD check --as-cran` is clean and the
+package passes on macOS, Windows, and Linux across R release, devel, and
+oldrel.
+
+A log-spiral companion, `conch()`, was cut from this release. A
+head-to-head stress test on real data showed a line chart reads
+magnitude and timing better and a heatmap reads phase-by-trend better,
+which is the spiral’s own supposed niche. It survives as an expressive
+object for covers and 3D-printed data sculptures rather than as an
+analytical instrument, and may return once it is worth shipping. The
+code is kept in `dev/` and the stress test that settled it lives in the
+superseded `ggconch/` folder.
 
 # Package index
 
@@ -78,16 +91,12 @@ Read a trajectory against a fixed or moving boundary.
 - [`boundary_plot()`](https://rendell.github.io/ggboundary/reference/boundary_plot.md)
   : Trajectory-against-boundary plot (themed one-call wrapper)
 
-## Companions
+## Snapshot
 
-The static polar snapshot and the expressive spiral.
+The Doughnut, many dimensions at a single instant.
 
 - [`doughnut()`](https://rendell.github.io/ggboundary/reference/doughnut.md)
-  : Doughnut Economics chart (static safe operating space)
-- [`conch()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
-  [`spiral_boundary()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
-  : Conch: the boundary trajectory wound into a spiral (expressive
-  companion)
+  : Doughnut Economics chart (the safe and just space at one instant)
 
 # Articles
 

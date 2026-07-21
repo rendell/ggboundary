@@ -76,9 +76,7 @@ combine it with any scales, facets, and themes as usual. See
 [`boundary_plot()`](https://rendell.github.io/ggboundary/reference/boundary_plot.md)
 for a one-call themed wrapper, and
 [`doughnut()`](https://rendell.github.io/ggboundary/reference/doughnut.md)
-/
-[`conch()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
-for the polar snapshot and the expressive spiral companions.
+for the polar single-instant snapshot.
 
 ## Examples
 

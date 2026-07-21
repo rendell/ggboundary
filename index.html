@@ -79,20 +79,24 @@
 <span>              title <span class="op">=</span> <span class="st">"Concentration against a moving ceiling"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="two-companions-honestly-framed">Two companions, honestly framed<a class="anchor" aria-label="anchor" href="#two-companions-honestly-framed"></a>
+<h2 id="the-snapshot-doughnut">The snapshot: <code>doughnut()</code>
+<a class="anchor" aria-label="anchor" href="#the-snapshot-doughnut"></a>
 </h2>
-<p><code><a href="reference/doughnut.html">doughnut()</a></code> draws the classic Doughnut Economics chart, the same boundary primitives at a single instant on polar coordinates. It is the snapshot; <code><a href="reference/geom_boundary.html">geom_boundary()</a></code> is its time-dual.</p>
-<p><code><a href="reference/spiral_boundary.html">conch()</a></code> winds the trajectory into a log-spiral. It is an expressive object for communication, covers, and 3D-printed data sculptures, not an analytical instrument. On real data a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, so the conch ships paired with the Cartesian view rather than in place of it. The stress test that established this lives in the superseded <code>ggconch/</code> folder.</p>
+<p><code><a href="reference/doughnut.html">doughnut()</a></code> draws the Doughnut in its canonical form. The two rings carry independent dimension sets, so a twelve-part social foundation and a nine-part ecological ceiling divide the circle differently, as in Raworth’s original. Shortfalls bite inward toward the hole, overshoots break outward past the ceiling, both in red, and dimensions whose boundary is not quantified are drawn pale rather than given a length they do not have.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/doughnut.html">doughnut</a></span><span class="op">(</span><span class="va">social</span>, <span class="va">ecological</span>, title <span class="op">=</span> <span class="st">"A global Doughnut"</span><span class="op">)</span></span></code></pre></div>
+<p>It is the single-instant view; <code><a href="reference/geom_boundary.html">geom_boundary()</a></code> is its time-dual.</p>
 </div>
 <div class="section level2">
 <h2 id="why-this-exists">Why this exists<a class="anchor" aria-label="anchor" href="#why-this-exists"></a>
 </h2>
-<p>The doughnut has no time in it. This package supplies the temporal dual, and makes the exogenous-versus-endogenous boundary choice explicit, which is where the methods contribution sits. Sibling to the <code>pyramid3d</code> and tourism-data-objects work.</p>
+<p>The Doughnut has no time in it. This package supplies the temporal dual, and makes the exogenous-versus-endogenous boundary choice explicit, which is where the methods contribution sits. Sibling to the <code>pyramid3d</code> and tourism-data-objects work.</p>
 </div>
 <div class="section level2">
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
-<p>Pre-CRAN. Core layer, doughnut, and conch build and render. Remaining before submission: <code>R CMD check</code> clean in a full R session, roxygen-regenerated man pages, a fuller vignette, and a pkgdown site.</p>
+<p>Pre-CRAN, version 0.1.0. <code>R CMD check --as-cran</code> is clean and the package passes on macOS, Windows, and Linux across R release, devel, and oldrel.</p>
+<p>A log-spiral companion, <code>conch()</code>, was cut from this release. A head-to-head stress test on real data showed a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, which is the spiral’s own supposed niche. It survives as an expressive object for covers and 3D-printed data sculptures rather than as an analytical instrument, and may return once it is worth shipping. The code is kept in <code>dev/</code> and the stress test that settled it lives in the superseded <code>ggconch/</code> folder.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
