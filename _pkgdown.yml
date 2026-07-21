@@ -1,0 +1,20 @@
+url: https://rendell.github.io/ggboundary
+template:
+  bootstrap: 5
+
+reference:
+- title: Core
+  desc: Read a trajectory against a fixed or moving boundary.
+  contents:
+  - geom_boundary
+  - boundary_plot
+- title: Companions
+  desc: The static polar snapshot and the expressive spiral.
+  contents:
+  - doughnut
+  - spiral_boundary
+
+articles:
+- title: Get started
+  contents:
+  - ggboundary

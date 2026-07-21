@@ -1,0 +1,10 @@
+^verify-render\.R$
+^gallery-output$
+^cran-comments\.md$
+^\.Rproj\.user$
+^.*\.Rproj$
+^LICENSE\.md$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
