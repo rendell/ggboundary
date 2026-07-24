@@ -43,6 +43,29 @@ doughnut(social, ecological, title = "A global Doughnut")
 
 It is the single-instant view; `geom_boundary()` is its time-dual.
 
+## Planetary boundaries: `planetary_boundaries()`
+
+The Stockholm Resilience Centre draws the nine planetary boundaries as a wedge wheel, and the Doughnut takes them as its ecological ceiling. Both are single-instant status readouts. `planetary_boundaries()` turns a table of boundary status, either normalised control variables (Holocene baseline at 0, boundary at 1) or raw value-and-threshold pairs, into the `ecological` data frame `doughnut()` expects, so the ceiling is driven by data rather than typed by hand. It interoperates with the Potsdam Institute [`boundaries`](https://github.com/pik-tess/boundaries) package.
+
+```r
+pb <- data.frame(
+  boundary = c("climate change", "biosphere integrity", "nitrogen & phosphorus"),
+  value    = c(1.4, 3.0, 2.4))          # normalised: 1 = at the boundary
+doughnut(social, planetary_boundaries(pb))
+```
+
+The package does not redraw the wedge wheel itself: that snapshot is already served by `boundaries::plot_status()`, and a second static snapshot would work against the point of the package. Instead the vignette "Planetary boundaries as moving targets" shows a boundary as a trajectory against a fixed and then a moving threshold, the view the wheel and the Doughnut structurally lack.
+
+## The expressive companion: `conch()`
+
+`conch()` (an alias for `spiral_boundary()`) winds the same trajectory-against-boundary idea into a log-spiral, time running around the whorls and overshoot breaking past a dashed ring. It is deliberately *not* an analytical instrument: in head-to-head tests on real tourism data a line chart read magnitude and timing better and a heatmap read phase-by-trend better, which is the spiral's own supposed niche. It stays in the package for what it is good at, communication, covers, and 3D-printed data objects, and its documentation says so. Reach for `geom_boundary()` to see the data; reach for the conch to make the boundary idea memorable, and pair the two honestly.
+
+```r
+conch(time = 2016:2025,
+      value = c(38, 40, 41, 43, 45, 47, 49, 52, 54, 55),
+      boundary = 50, label_fmt = round)
+```
+
 ## Why this exists
 
 The Doughnut has no time in it. This package supplies the temporal dual, and makes the exogenous-versus-endogenous boundary choice explicit, which is where the methods contribution sits. Sibling to the `pyramid3d` and tourism-data-objects work.
@@ -51,4 +74,4 @@ The Doughnut has no time in it. This package supplies the temporal dual, and mak
 
 Pre-CRAN, version 0.1.0. `R CMD check --as-cran` is clean and the package passes on macOS, Windows, and Linux across R release, devel, and oldrel.
 
-A log-spiral companion, `conch()`, was cut from this release. A head-to-head stress test on real data showed a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, which is the spiral's own supposed niche. It survives as an expressive object for covers and 3D-printed data sculptures rather than as an analytical instrument, and may return once it is worth shipping. The code is kept in `dev/` and the stress test that settled it lives in the superseded `ggconch/` folder.
+The four exports split cleanly by job: `geom_boundary()`/`boundary_plot()` for reading a trajectory against a moving boundary over time, `doughnut()` and `planetary_boundaries()` for the single-instant snapshot, and `conch()`/`spiral_boundary()` as the expressive companion for communication and physical data objects. The stress test that settled the conch's scope (line chart and heatmap both beat it as analysis) lives in the superseded `ggconch/` folder.

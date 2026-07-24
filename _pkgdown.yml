@@ -12,8 +12,19 @@ reference:
   desc: The Doughnut, many dimensions at a single instant.
   contents:
   - doughnut
+- title: Planetary boundaries
+  desc: Feed the ecological ceiling from boundary status data.
+  contents:
+  - planetary_boundaries
+- title: Expressive companion
+  desc: For communication, covers, and physical data objects, not analysis.
+  contents:
+  - spiral_boundary
 
 articles:
 - title: Get started
   contents:
   - ggboundary
+- title: Planetary boundaries as moving targets
+  contents:
+  - planetary-boundaries-over-time

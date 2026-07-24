@@ -1,3 +1,20 @@
+# ggboundary (development version)
+
+* `planetary_boundaries()` converts a table of planetary-boundary status, either
+  normalised control variables (Holocene baseline at 0, boundary at 1) or raw
+  value-and-threshold pairs, into the `ecological` data frame `doughnut()`
+  expects, so the ecological ceiling can be driven from real boundary data and
+  from the output of the Potsdam Institute `boundaries` package.
+* New vignette "Planetary boundaries as moving targets": feeds the Doughnut
+  ceiling from boundary status and shows one boundary as a trajectory against a
+  fixed and then a moving threshold, the view the Stockholm wedge wheel and the
+  Doughnut structurally lack.
+* `conch()` (alias `spiral_boundary()`) winds the trajectory-against-boundary
+  idea into a log-spiral. It ships as an explicitly expressive companion for
+  communication, covers, and physical data objects, not as an analytical
+  instrument, matching the scope the DESCRIPTION already stated. The earlier cut
+  applied to selling it as analysis; its documentation continues to refuse that.
+
 # ggboundary 0.1.0
 
 First release.
