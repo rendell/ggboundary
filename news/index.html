@@ -35,6 +35,14 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="ggboundary-development-version">ggboundary (development version)<a class="anchor" aria-label="anchor" href="#ggboundary-development-version"></a></h2>
+<ul><li>
+<code><a href="../reference/planetary_boundaries.html">planetary_boundaries()</a></code> converts a table of planetary-boundary status, either normalised control variables (Holocene baseline at 0, boundary at 1) or raw value-and-threshold pairs, into the <code>ecological</code> data frame <code><a href="../reference/doughnut.html">doughnut()</a></code> expects, so the ecological ceiling can be driven from real boundary data and from the output of the Potsdam Institute <code>boundaries</code> package.</li>
+<li>New vignette “Planetary boundaries as moving targets”: feeds the Doughnut ceiling from boundary status and shows one boundary as a trajectory against a fixed and then a moving threshold, the view the Stockholm wedge wheel and the Doughnut structurally lack.</li>
+<li>
+<code><a href="../reference/spiral_boundary.html">conch()</a></code> (alias <code><a href="../reference/spiral_boundary.html">spiral_boundary()</a></code>) winds the trajectory-against-boundary idea into a log-spiral. It ships as an explicitly expressive companion for communication, covers, and physical data objects, not as an analytical instrument, matching the scope the DESCRIPTION already stated. The earlier cut applied to selling it as analysis; its documentation continues to refuse that.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="ggboundary-010">ggboundary 0.1.0<a class="anchor" aria-label="anchor" href="#ggboundary-010"></a></h2>
 <p>First release.</p>
 <ul><li>
@@ -43,9 +51,10 @@
 <code><a href="../reference/boundary_plot.html">boundary_plot()</a></code> wraps it into a themed one-call figure and reports the share of the series in overshoot.</li>
 <li>
 <code><a href="../reference/doughnut.html">doughnut()</a></code> draws the Doughnut in its canonical form: independent social foundation and ecological ceiling rings, shortfalls biting inward, overshoots breaking outward, and unquantified boundaries drawn pale.</li>
-<li>A log-spiral companion (<code>conch()</code>) was cut before release. On real data a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, so it did not earn a place as an analytical geom.</li>
+<li>A log-spiral companion (<code><a href="../reference/spiral_boundary.html">conch()</a></code>) was cut before release. On real data a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, so it did not earn a place as an analytical geom.</li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

@@ -88,6 +88,28 @@
 <p>It is the single-instant view; <code><a href="reference/geom_boundary.html">geom_boundary()</a></code> is its time-dual.</p>
 </div>
 <div class="section level2">
+<h2 id="planetary-boundaries-planetary_boundaries">Planetary boundaries: <code>planetary_boundaries()</code>
+<a class="anchor" aria-label="anchor" href="#planetary-boundaries-planetary_boundaries"></a>
+</h2>
+<p>The Stockholm Resilience Centre draws the nine planetary boundaries as a wedge wheel, and the Doughnut takes them as its ecological ceiling. Both are single-instant status readouts. <code><a href="reference/planetary_boundaries.html">planetary_boundaries()</a></code> turns a table of boundary status, either normalised control variables (Holocene baseline at 0, boundary at 1) or raw value-and-threshold pairs, into the <code>ecological</code> data frame <code><a href="reference/doughnut.html">doughnut()</a></code> expects, so the ceiling is driven by data rather than typed by hand. It interoperates with the Potsdam Institute <a href="https://github.com/pik-tess/boundaries" class="external-link"><code>boundaries</code></a> package.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  boundary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"climate change"</span>, <span class="st">"biosphere integrity"</span>, <span class="st">"nitrogen &amp; phosphorus"</span><span class="op">)</span>,</span>
+<span>  value    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.4</span>, <span class="fl">3.0</span>, <span class="fl">2.4</span><span class="op">)</span><span class="op">)</span>          <span class="co"># normalised: 1 = at the boundary</span></span>
+<span><span class="fu"><a href="reference/doughnut.html">doughnut</a></span><span class="op">(</span><span class="va">social</span>, <span class="fu"><a href="reference/planetary_boundaries.html">planetary_boundaries</a></span><span class="op">(</span><span class="va">pb</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The package does not redraw the wedge wheel itself: that snapshot is already served by <code>boundaries::plot_status()</code>, and a second static snapshot would work against the point of the package. Instead the vignette “Planetary boundaries as moving targets” shows a boundary as a trajectory against a fixed and then a moving threshold, the view the wheel and the Doughnut structurally lack.</p>
+</div>
+<div class="section level2">
+<h2 id="the-expressive-companion-conch">The expressive companion: <code>conch()</code>
+<a class="anchor" aria-label="anchor" href="#the-expressive-companion-conch"></a>
+</h2>
+<p><code><a href="reference/spiral_boundary.html">conch()</a></code> (an alias for <code><a href="reference/spiral_boundary.html">spiral_boundary()</a></code>) winds the same trajectory-against-boundary idea into a log-spiral, time running around the whorls and overshoot breaking past a dashed ring. It is deliberately <em>not</em> an analytical instrument: in head-to-head tests on real tourism data a line chart read magnitude and timing better and a heatmap read phase-by-trend better, which is the spiral’s own supposed niche. It stays in the package for what it is good at, communication, covers, and 3D-printed data objects, and its documentation says so. Reach for <code><a href="reference/geom_boundary.html">geom_boundary()</a></code> to see the data; reach for the conch to make the boundary idea memorable, and pair the two honestly.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/spiral_boundary.html">conch</a></span><span class="op">(</span>time <span class="op">=</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2025</span>,</span>
+<span>      value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">40</span>, <span class="fl">41</span>, <span class="fl">43</span>, <span class="fl">45</span>, <span class="fl">47</span>, <span class="fl">49</span>, <span class="fl">52</span>, <span class="fl">54</span>, <span class="fl">55</span><span class="op">)</span>,</span>
+<span>      boundary <span class="op">=</span> <span class="fl">50</span>, label_fmt <span class="op">=</span> <span class="va">round</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="why-this-exists">Why this exists<a class="anchor" aria-label="anchor" href="#why-this-exists"></a>
 </h2>
 <p>The Doughnut has no time in it. This package supplies the temporal dual, and makes the exogenous-versus-endogenous boundary choice explicit, which is where the methods contribution sits. Sibling to the <code>pyramid3d</code> and tourism-data-objects work.</p>
@@ -96,7 +118,7 @@
 <h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
 </h2>
 <p>Pre-CRAN, version 0.1.0. <code>R CMD check --as-cran</code> is clean and the package passes on macOS, Windows, and Linux across R release, devel, and oldrel.</p>
-<p>A log-spiral companion, <code>conch()</code>, was cut from this release. A head-to-head stress test on real data showed a line chart reads magnitude and timing better and a heatmap reads phase-by-trend better, which is the spiral’s own supposed niche. It survives as an expressive object for covers and 3D-printed data sculptures rather than as an analytical instrument, and may return once it is worth shipping. The code is kept in <code>dev/</code> and the stress test that settled it lives in the superseded <code>ggconch/</code> folder.</p>
+<p>The four exports split cleanly by job: <code><a href="reference/geom_boundary.html">geom_boundary()</a></code>/<code><a href="reference/boundary_plot.html">boundary_plot()</a></code> for reading a trajectory against a moving boundary over time, <code><a href="reference/doughnut.html">doughnut()</a></code> and <code><a href="reference/planetary_boundaries.html">planetary_boundaries()</a></code> for the single-instant snapshot, and <code><a href="reference/spiral_boundary.html">conch()</a></code>/<code><a href="reference/spiral_boundary.html">spiral_boundary()</a></code> as the expressive companion for communication and physical data objects. The stress test that settled the conch’s scope (line chart and heatmap both beat it as analysis) lives in the superseded <code>ggconch/</code> folder.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

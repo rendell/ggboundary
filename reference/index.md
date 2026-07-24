@@ -15,3 +15,19 @@ The Doughnut, many dimensions at a single instant.
 
 - [`doughnut()`](https://rendell.github.io/ggboundary/reference/doughnut.md)
   : Doughnut Economics chart (the safe and just space at one instant)
+
+## Planetary boundaries
+
+Feed the ecological ceiling from boundary status data.
+
+- [`planetary_boundaries()`](https://rendell.github.io/ggboundary/reference/planetary_boundaries.md)
+  : Planetary-boundary status as an ecological ceiling
+
+## Expressive companion
+
+For communication, covers, and physical data objects, not analysis.
+
+- [`conch()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
+  [`spiral_boundary()`](https://rendell.github.io/ggboundary/reference/spiral_boundary.md)
+  : Conch: the boundary trajectory wound into a spiral (expressive
+  companion)
