@@ -77,8 +77,9 @@ spiral_boundary <- function(time, value, boundary,
                                 character(1)))
   p <- ggplot2::ggplot() +
     ggplot2::geom_polygon(data = segs,
-      ggplot2::aes(x = x, y = y, group = group, fill = over), colour = NA) +
-    ggplot2::geom_path(data = ring, ggplot2::aes(x = x, y = y),
+      ggplot2::aes(x = .data$x, y = .data$y, group = .data$group, fill = .data$over),
+      colour = NA) +
+    ggplot2::geom_path(data = ring, ggplot2::aes(x = .data$x, y = .data$y),
       linetype = 2, colour = "#7a1512", linewidth = 0.5) +
     ggplot2::scale_fill_gradient2(low = pal[1], mid = "#efe6cf",
       high = pal[length(pal)], midpoint = 0, name = "vs boundary") +
@@ -87,10 +88,11 @@ spiral_boundary <- function(time, value, boundary,
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   if (show_years && nrow(lab) > 0) p <- p +
     ggplot2::geom_segment(data = lab,
-      ggplot2::aes(x = x * 1.006, y = y * 1.006, xend = x * 1.05, yend = y * 1.05),
+      ggplot2::aes(x = .data$x * 1.006, y = .data$y * 1.006,
+                   xend = .data$x * 1.05, yend = .data$y * 1.05),
       colour = "#3a2f26", linewidth = 0.3) +
     ggplot2::geom_text(data = lab,
-      ggplot2::aes(x = x * 1.11, y = y * 1.11, label = yr),
+      ggplot2::aes(x = .data$x * 1.11, y = .data$y * 1.11, label = .data$yr),
       size = 2.5, colour = "#3a2f26")
   p
 }
