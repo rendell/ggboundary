@@ -70,6 +70,14 @@ conch(time = 2016:2025,
 
 The Doughnut has no time in it. This package supplies the temporal dual, and makes the exogenous-versus-endogenous boundary choice explicit, which is where the methods contribution sits. Sibling to the `pyramid3d` and tourism-data-objects work.
 
+## Why it is free
+
+The Doughnut has been in public circulation since 2017. Cities and ministries have drawn it into their own planning, and the frame belongs to everyone who uses it. The tool for drawing one did not, so anyone who wanted the chart had to build it again from scratch, and most gave up and drew it by hand in a slide.
+
+The serviceberry is worth more to the tree in circulation than in storage, and a gift is held by passing it on. Software is unusually literal about this, because the marginal cost of the next copy is zero and a boundary chart nobody can draw does no work at all. So the licence is MIT, the source is on GitHub, and the vignettes carry the method rather than only the syntax.
+
+The return worth having is not a citation. It is the case where the boundary moved and the package could not follow. Open an issue with that one and the tool gets better for whoever needs it next.
+
 ## Status
 
 Pre-CRAN, version 0.1.0. `R CMD check --as-cran` is clean and the package passes on macOS, Windows, and Linux across R release, devel, and oldrel.
