@@ -13,8 +13,7 @@ Description: A small grammar for boundary visualisations built on 'ggplot2'.
     communication and physical data objects, both documented as companions to
     the Cartesian view rather than substitutes for it. Primitives: boundary
     (scalar or series), trajectory, safe band, overshoot, slack, zone of
-    uncertainty. Keywords: doughnut economics, planetary boundaries, resilience,
-    safe operating space, adaptive capacity.
+    uncertainty.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: ggplot2 (>= 3.4.0)

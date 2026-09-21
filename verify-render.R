@@ -1,11 +1,27 @@
-# Iteration: 1
+# Iteration: 2
 # Verify ggboundary renders on the same Aruba-calibrated data used in the ggconch
 # stress test: geom_boundary (flagship) and doughnut (single-instant snapshot).
+#
+# PROVENANCE, read before reusing any output of this script.
+# Only the SEASONAL SHAPE is real. `si` is a 12-month index derived from
+# aruba-data/datasets/tourism-monthly-visitors (33 observations, 2018-2020,
+# stop-over visitors). Everything else in the flagship series is constructed
+# here: the level comes from approx() over five hand-set anchor points, the
+# 2020-21 collapse and recovery are hand-set multipliers, the noise is rnorm(),
+# and the capacity ceiling is invented. The result is a SIMULATED series with
+# Aruba seasonality, not an Aruba arrivals series, and it is labelled that way
+# in the chart. No real monthly arrivals series covering 2016-2024 exists in
+# aruba-data; building one is the prerequisite for a chart that can claim to
+# be Aruba's. See the provenance rule in aruba-data/README.md.
+#
+# Paths default to this machine's layout and can be overridden with the
+# GGB_HUB and GGB_PKG environment variables.
 suppressPackageStartupMessages(library(ggplot2))
 set.seed(42)
 
-hub <- "C:/Users/Rendell CE/Documents/GitHub/knowledge-hub"   # real Aruba data source
-pkg <- "C:/Users/Rendell CE/Documents/GitHub/ggboundary"      # package now lives here
+hub <- Sys.getenv("GGB_HUB", "C:/Users/rendell/Documents/GitHub/knowledge-hub")
+pkg <- Sys.getenv("GGB_PKG", "C:/Users/rendell/Documents/GitHub/ggboundary")
+stopifnot(dir.exists(hub), dir.exists(pkg))
 out <- file.path(pkg, "gallery-output")
 dir.create(out, showWarnings = FALSE, recursive = TRUE)
 for (f in c("boundary.R", "doughnut.R")) source(file.path(pkg, "R", f))
@@ -37,8 +53,8 @@ g$boundary <- approx(c(2016, 2019.9, 2020.5, 2022, 2024),
 # collapse, not a safe state, and a calm green wash there would read as reassuring.
 p1 <- boundary_plot(g, "t", "visitors", "boundary",
                     show_slack = FALSE,
-                    title = "Aruba arrivals against a moving capacity ceiling",
-                    y_lab = "stop-over visitors / month") +
+                    title = "Simulated arrivals with Aruba seasonality, against a moving ceiling",
+                    y_lab = "stop-over visitors / month (simulated)") +
       scale_x_continuous(breaks = yrs)
 ggsave(file.path(out, "boundary.png"), p1, width = 8, height = 4.2, dpi = 150, bg = "white")
 

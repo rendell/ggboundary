@@ -1,18 +1,18 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
-* This is a new release (the "New submission" note is expected).
-* "checking for future file timestamps ... unable to verify current time" is an
-  environmental note (no network access to the time server during the check),
-  not a package issue.
+* This is a new release, so the "New submission" note is expected. It is the
+  only note; nothing else was flagged.
 
 ## Test environments
 
-* local Windows 11, R 4.2.2
-* (to add before submission: win-builder devel + release, macOS builder,
-  R-hub Ubuntu/Fedora)
+* local Windows 11, R 4.6.1 (2026-06-24 ucrt), ggplot2 4.0.3
+* win-builder, R-release 4.6.1 (2026-06-24 ucrt)
+* (to add before submission: win-builder R-devel)
 
 ## Notes
 
 * New submission.
+* The package is pure R with no compiled code. Tests, examples, and both
+  vignettes run and rebuild during the check.
